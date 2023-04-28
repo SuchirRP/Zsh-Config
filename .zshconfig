@@ -1,0 +1,51 @@
+#Enable colours and change PA1 prompt variable
+autoload -U colors && colors
+PS1="%B%{$fg[magenta]%}[%{$fg[blue]%}%n%{$fg[blue]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[magenta]%}]%{$reset_color%}$%b "
+
+# Lines configured by zsh-newuser-install
+HISTFILE=~/cache/zsh/.zsh_histfile
+HISTSIZE=1000
+SAVEHIST=10000
+
+setopt notify
+unsetopt beep
+
+#vi mode
+bindkey -v
+
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+#Load aliases if file is existant
+[ -f "$HOME/.config/zsh/zsh_aliases" ] && source "$HOME/.config/zsh/zsh_aliases"
+
+#Plugins
+source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.config/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.config/zsh/plugins/supercharge/supercharge.plugin.zsh
+#zsh-suggestions sourcing
+fpath=(~/.config/zsh/plugins/zsh-completions/src $fpath)
+source ~/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+#substring search keybinds
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+##Paths and Stuff
+#nvm - node version manager
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#Cargo
+. "$HOME/.cargo/env"
+
+##Python path to prevent pip error
+export PATH="/home/frzfishcustard/.local/bin:$PATH"

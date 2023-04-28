@@ -1,0 +1,30 @@
+alias v='nvim'
+alias purge='sudo rm -r'
+alias cls='clear'
+alias l='ls -a'
+alias :q='exit'
+alias neofetchimg='neofetch --backend kitty --source Pictures/Wallpapers/LinuxStuff/Arch/409237-Arch-Linux-UwU-Linux-removebg-preview-scaled.png'
+##kitten aliases
+alias icat="kitty +kitten icat"
+alias s="kitty +kitten ssh"
+alias d="kitty +kitten diff"
+
+function mkcd () {
+    mkdir "$1" && cd "$1"
+ }
+
+ function sysup() {
+     sudo pacman -Syu &&  paru -Sua
+}
+
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+#Bind ctrl-o to lpcd
+bindkey -s '^o' 'lfcd\n'
