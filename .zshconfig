@@ -13,6 +13,7 @@ unsetopt beep
 #vi mode
 bindkey -v
 
+autoload -Uz compinit
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
