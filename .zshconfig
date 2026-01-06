@@ -50,3 +50,6 @@ export NVM_DIR="$HOME/.nvm"
 
 ##Python path to prevent pip error
 export PATH="/home/frzfishcustard/.local/bin:$PATH"
+
+##Dotnet
+export PATH="$PATH:$HOME/.dotnet/tools"
